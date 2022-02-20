@@ -49,7 +49,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.enable_hwc_vds=1 \
     setprop vendor.opengles.version=196608 \
     setprop persist.graphics.vulkan.disable=true \
-    ro.vendor.display.cabl=0
+    ro.vendor.display.cabl=0 \
+    ro.sf.lcd_density=213
 
 # DRM
 PRODUCT_PROPERTY_OVERRIDES += \

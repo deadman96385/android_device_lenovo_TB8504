@@ -14,7 +14,10 @@
 # limitations under the License.
 #
 
-COMMON_PATH := device/lenovo/tb-common
+DEVICE_PATH := device/lenovo/TB8504
+
+# Asserts
+TARGET_OTA_ASSERT_DEVICE := TB-8504X,TB-8504F,tb-8504x,tb-8504f,tb_8504
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := msm8937
@@ -101,10 +104,13 @@ AUDIO_FEATURE_ENABLED_AUDIOSPHERE := true
 # Bluetooth
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_READ_ADDR_FROM_PROP := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Camera
 BOARD_QTI_CAMERA_32BIT_ONLY := true
 USE_DEVICE_SPECIFIC_CAMERA := true
+TARGET_USES_QTI_CAMERA_DEVICE := true
+TARGET_TS_MAKEUP := true
 
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
@@ -120,7 +126,7 @@ TARGET_ENABLE_MEDIADRM_64 := true
 TARGET_HW_DISK_ENCRYPTION := true
 
 # Filesystem
-TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
+TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
 # FM
 BOARD_HAVE_QCOM_FM := true
@@ -138,9 +144,13 @@ TARGET_USES_HWC2 := true
 TARGET_USES_ION := true
 
 # HIDL
-DEVICE_FRAMEWORK_MANIFEST_FILE := $(COMMON_PATH)/framework_manifest.xml
-DEVICE_MANIFEST_FILE := $(COMMON_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(COMMON_PATH)/compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
+
+# Init
+TARGET_INIT_VENDOR_LIB := libinit_lenovo_tb8504
+TARGET_RECOVERY_DEVICE_MODULES := libinit_lenovo_tb8504
 
 # Kernel
 BOARD_KERNEL_BASE := 0x80000000
@@ -154,6 +164,7 @@ BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/lenovo/msm8953
+TARGET_KERNEL_CONFIG := lineageos_tb8504_defconfig
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -167,6 +178,8 @@ BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4080218112
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 9921059840 # 9921076224 - 16384
 BOARD_ROOT_EXTRA_SYMLINKS += \
     /vendor/dsp:/dsp \
     /vendor/firmware_mnt:/firmware
@@ -178,7 +191,7 @@ TARGET_HAS_NO_WLAN_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.qcom
 
 # RIL
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
@@ -191,13 +204,13 @@ SELINUX_IGNORE_NEVERALLOWS := true
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
-    $(COMMON_PATH)/sepolicy
+    $(DEVICE_PATH)/sepolicy
 
 BOARD_PLAT_PUBLIC_SEPOLICY_DIR += \
-    $(COMMON_PATH)/sepolicy/public
+    $(DEVICE_PATH)/sepolicy/public
 
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += \
-    $(COMMON_PATH)/sepolicy/private
+    $(DEVICE_PATH)/sepolicy/private
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
@@ -206,10 +219,10 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_POWERHAL_VARIANT := qcom
 
 # Properties
-TARGET_SYSTEM_PROP += $(COMMON_PATH)/system.prop
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := $(COMMON_PATH)
+TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # WiFi
 BOARD_HAS_QCOM_WLAN := true
@@ -224,4 +237,4 @@ WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
 # Inherit from the proprietary version
-include vendor/lenovo/tb-common/BoardConfigVendor.mk
+-include vendor/lenovo/TB8504/BoardConfigVendor.mk
