@@ -64,7 +64,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.gps.agps_provider=1
 
-
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=0 \
@@ -102,16 +101,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=libqti-perfd-client.so
 
-# Radio
+# Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
-    persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.multisim.config=dsds \
-    ro.telephony.call_ring.multiple=false \
-    persist.vendor.radio.custom_ecc=1 \
-    persist.vendor.radio.rat_on=combine \
-    persist.vendor.radio.sib16_support=1 \
-    persist.vendor.data.mode=concurrent
+    ro.radio.noril=true
 
 # Time services
 PRODUCT_PROPERTY_OVERRIDES += \
